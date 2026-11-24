@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Easiest from the site's **Send a reading** page, which fills this in for you: https://loganeberwein.github.io/riemann-statement-a-day/#send
+        Easiest from the site's **Send a reading** page, which fills this in for you: https://riemannstatementaday.github.io/#send
 
         We re-read the statement against the same Lean declarations and reply here with our verdict: **Verified**, **Partial**, **Refuted** or **Unverified**. Then the reading goes into the log, misses included. This issue is public.
   - type: input

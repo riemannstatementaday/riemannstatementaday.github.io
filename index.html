@@ -195,7 +195,7 @@ footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);paddin
     <h1>Riemann Statement a Day</h1>
     <p class="lede">Each day, one statement from the reading blueprint of Levent Alpöge's Lean proof of the Riemann Hypothesis. Read it against the Lean source, then send what you found: a check, a concern, or the place you got stuck. Every reading is logged here, misses included.</p>
     <p class="credit">The statements, their labels and their links to Lean come from <a href="https://github.com/chrisflav/riemann-blueprint" target="_blank" rel="noopener">chrisflav/riemann-blueprint</a> (read it at <a href="https://riemann.fuxi.merten.dev" target="_blank" rel="noopener">riemann.fuxi.merten.dev</a>), with full credit. We aren't building a competing blueprint. The proof is Alpöge's. This page is run by volunteers and is not affiliated with him, Anthropic, or the Lean and Mathlib maintainers.</p>
-    <p class="credit">Source, data and history: <a href="https://github.com/loganeberwein/riemann-statement-a-day" target="_blank" rel="noopener">loganeberwein/riemann-statement-a-day</a>. Readings and the paper live in <code>data/</code> and change only by commit.</p>
+    <p class="credit">Source, data and history: <a href="https://github.com/riemannstatementaday/riemannstatementaday.github.io" target="_blank" rel="noopener">riemannstatementaday/riemannstatementaday.github.io</a>. Readings and the paper live in <code>data/</code> and change only by commit.</p>
     <p class="banner" id="banner" hidden></p>
     <nav class="views" aria-label="Views">
       <a href="#" data-v="board">Today &amp; index</a>
@@ -359,7 +359,7 @@ footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);paddin
       <span class="eyebrow">The paper · it grows as the readings come in</span>
       <h2>The Riemann Hypothesis, read from its Lean proof</h2>
       <p class="muted" style="font-size:16px">One human-readable account of Levent Alpöge's formal proof, assembled section by section from the statements read here, in the order the proof uses them.</p>
-      <p class="pnote">This is a reader's account, drafted by Claude (AI) and edited by this page's owner. It is not Alpöge's exposition and it has not been refereed. Where it and the Lean source disagree, the Lean source wins. Only the site's maintainers change it, by commit; to suggest a change, <a href="#send">send a reading</a> or <a href="https://github.com/loganeberwein/riemann-statement-a-day/issues" target="_blank" rel="noopener">open an issue</a>.</p>
+      <p class="pnote">This is a reader's account, drafted by Claude (AI) and edited by this page's owner. It is not Alpöge's exposition and it has not been refereed. Where it and the Lean source disagree, the Lean source wins. Only the site's maintainers change it, by commit; to suggest a change, <a href="#send">send a reading</a> or <a href="https://github.com/riemannstatementaday/riemannstatementaday.github.io/issues" target="_blank" rel="noopener">open an issue</a>.</p>
       <div class="pmeta"><span id="pCover"></span></div>
       <div class="prog" aria-hidden="true"><span id="pBar" style="width:0"></span></div>
     </div>
@@ -383,7 +383,7 @@ const BP=JSON.parse(document.getElementById("bp").textContent);
 const CHAPS=BP.chapters, CHECK=new Set(BP.check);
 const NODES=BP.nodes.map(a=>({id:a[0],title:a[1],chap:a[2],kind:a[3],prov:a[4],uses:a[5],lean:a[6],path:a[7]}));
 const BY_ID=Object.fromEntries(NODES.map(n=>[n.id,n]));
-const ISSUES="https://github.com/loganeberwein/riemann-statement-a-day/issues";
+const ISSUES="https://github.com/riemannstatementaday/riemannstatementaday.github.io/issues";
 const SRC="https://github.com/chrisflav/riemann-blueprint/blob/HEAD/blueprint/";
 const STAMP_NAME={unread:"Unread",live:"Live",checked:"Checked",confirmed:"Confirmed",concern:"Concern",wall:"Wall",exposition:"Exposition",question:"Question"};
 const VERDICTS=new Set(["checked","concern","wall"]),KINDS=new Set(["checked","concern","wall","exposition","question"]);

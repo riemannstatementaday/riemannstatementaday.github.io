@@ -2,7 +2,7 @@
 
 A community reading log for the [reading blueprint](https://github.com/chrisflav/riemann-blueprint) of Levent Alpöge's Lean proof of the Riemann Hypothesis, and a human-readable paper that grows as its statements are read.
 
-**Site:** https://loganeberwein.github.io/riemann-statement-a-day/
+**Site:** https://riemannstatementaday.github.io/
 
 Each day the site picks one statement. A reader reads it against the Lean source and sends what they found: it checks out, a mismatch or a gap, the place they got stuck, or a plain-language account for the paper. Every reading is logged, misses included. A verdict here says whether the blueprint's account matches the Lean source; it says nothing new about whether the proof is correct, which the Lean kernel already checks.
 
