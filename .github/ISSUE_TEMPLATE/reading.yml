@@ -1,0 +1,68 @@
+name: Send a reading
+description: Read one blueprint statement against the Lean source and tell us what you found.
+title: "[Reading] statement-id: title"
+labels: ["reading"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Easiest from the site's **Send a reading** page, which fills this in for you: https://loganeberwein.github.io/riemann-statement-a-day/#send
+
+        We re-read the statement against the same Lean declarations and reply here with our verdict: **Verified**, **Partial**, **Refuted** or **Unverified**. Then the reading goes into the log, misses included. This issue is public.
+  - type: input
+    id: node
+    attributes:
+      label: Statement id
+      description: The blueprint id, e.g. thm-critical-line. Find it in the index on the site.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is this?
+      options:
+        - Checks out
+        - Mismatch or gap
+        - Honest wall
+        - Exposition
+        - Question or correction
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: Links (one per line)
+      description: A write-up, a gist, a Lean file at a commit, a shared AI transcript. https only.
+  - type: textarea
+    id: reading
+    attributes:
+      label: The reading
+      description: Which declarations you read, at which commit · what the blueprint says · what the Lean says · where they agree or part · what you didn't check.
+    validations:
+      required: true
+  - type: dropdown
+    id: made
+    attributes:
+      label: Who did the reading?
+      options:
+        - I did, without AI
+        - I did, with AI help
+        - An AI did, and I'm relaying it
+    validations:
+      required: true
+  - type: input
+    id: tools
+    attributes:
+      label: Which AI did what (model and version), and what you checked yourself
+  - type: input
+    id: credit
+    attributes:
+      label: Your name (optional, how you'd like to be credited)
+      description: Left blank, we credit your GitHub handle.
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Consent
+      options:
+        - label: You may publish this reading, the name above and your verdict on the site.
+          required: true
