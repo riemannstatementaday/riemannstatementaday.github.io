@@ -2,7 +2,7 @@
 
 A reader's account of Levent Alpöge's formal proof, assembled from the statements read on [Riemann Statement a Day](https://riemannstatementaday.github.io/). Drafted by Claude (AI) and edited by the site's maintainers. It is not Alpöge's exposition and has not been refereed; where it and the Lean source disagree, the Lean source wins.
 
-Last updated 2026-11-24. Live version: https://riemannstatementaday.github.io/#paper
+Last updated 2026-11-25. Live version: https://riemannstatementaday.github.io/#paper
 
 
 ## §1. Introduction

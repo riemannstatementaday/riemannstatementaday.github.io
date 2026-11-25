@@ -2,7 +2,7 @@
 
 > Riemann Statement a Day is a community reading log for the reading blueprint of Levent Alpöge's Lean proof of the Riemann Hypothesis. Each statement of the blueprint is read against the Lean source and the result is logged: it checks out, a mismatch or gap, or an honest wall. Checked statements are assembled into a human-readable paper that grows as the reading goes. A verdict here says whether the blueprint's account matches the Lean source; the proof itself is checked by the Lean kernel. The site is run by volunteers and is not affiliated with Alpöge, Anthropic, or the Lean and Mathlib maintainers.
 
-Status as of 2026-11-24: 18 readings logged; 15 statements checked, 0 confirmed, 2 with open concerns, 1 where a reader got stuck, out of 416. The paper has 4 sections.
+Status as of 2026-11-25: 21 readings logged; 18 statements checked, 0 confirmed, 2 with open concerns, 1 where a reader got stuck, out of 416. The paper has 4 sections.
 
 ## When this site is useful to someone
 
