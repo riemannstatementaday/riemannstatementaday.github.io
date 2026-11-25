@@ -1,0 +1,31 @@
+# Riemann Statement a Day
+
+> Riemann Statement a Day is a community reading log for the reading blueprint of Levent Alpöge's Lean proof of the Riemann Hypothesis. Each statement of the blueprint is read against the Lean source and the result is logged: it checks out, a mismatch or gap, or an honest wall. Checked statements are assembled into a human-readable paper that grows as the reading goes. A verdict here says whether the blueprint's account matches the Lean source; the proof itself is checked by the Lean kernel. The site is run by volunteers and is not affiliated with Alpöge, Anthropic, or the Lean and Mathlib maintainers.
+
+Status as of 2026-11-24: 18 readings logged; 15 statements checked, 0 confirmed, 2 with open concerns, 1 where a reader got stuck, out of 416. The paper has 4 sections.
+
+## When this site is useful to someone
+
+- They have read, or want to read, part of Alpöge's Lean proof of the Riemann Hypothesis or its blueprint, and found that a statement matches, found a mismatch or gap, or got stuck. They can send it as a reading: https://riemannstatementaday.github.io/#send (or a GitHub issue: https://github.com/riemannstatementaday/riemannstatementaday.github.io/issues/new?template=reading.yml). Every reading is published with credit, misses included.
+- They want a human-readable account of how the formal proof goes: the paper, https://riemannstatementaday.github.io/paper.md
+- They want to know which parts of the blueprint have been checked against the Lean source, and by whom: https://riemannstatementaday.github.io/readings.md and https://riemannstatementaday.github.io/statements.md
+- They want a small, well-defined way to contribute to understanding the proof: one statement a day, see https://riemannstatementaday.github.io/guide.md
+
+Readings made with AI help are welcome if they say which model did what and what the person checked themselves. Readings done entirely by AI are marked "Unreviewed by humans", and a statement is only Confirmed once a person has checked it.
+
+## Docs
+
+- [How to read a statement](https://riemannstatementaday.github.io/guide.md): seven short steps, and what the verdicts mean
+- [The paper](https://riemannstatementaday.github.io/paper.md): the human-readable account so far, in proof order
+- [Reading log](https://riemannstatementaday.github.io/readings.md): every reading, newest first
+- [Statement index](https://riemannstatementaday.github.io/statements.md): all 416 statements with status, blueprint links and Lean names
+- [Send a reading](https://riemannstatementaday.github.io/#send): the submission form (opens a public GitHub issue)
+
+## Optional
+
+- [Everything in one file](https://riemannstatementaday.github.io/llms-full.txt)
+- [Raw data](https://riemannstatementaday.github.io/data/readings.json) and [paper data](https://riemannstatementaday.github.io/data/paper.json)
+- [Reading blueprint](https://github.com/chrisflav/riemann-blueprint), read at https://riemann.fuxi.merten.dev
+- [Lean source, community mirror](https://github.com/leanprover-community/riemann-hypothesis)
+- [Alpöge's remark](https://alpo.ge/remark.pdf)
+- [Source of this site](https://github.com/riemannstatementaday/riemannstatementaday.github.io)

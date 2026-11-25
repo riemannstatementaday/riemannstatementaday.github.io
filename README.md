@@ -15,6 +15,7 @@ Use the **Send a reading** page on the site, or open a [reading issue](../../iss
 - `index.html` is the whole site. The list of statements is built from the blueprint and embedded in it (titles, ids and Lean declaration names only).
 - `data/readings.json` is the reading log.
 - `data/paper.json` is the paper, one entry per section, in proof order.
+- `guide.md`, `paper.md`, `readings.md`, `statements.md`, `llms.txt`, `llms-full.txt`, `feed.xml`, `sitemap.xml` and `robots.txt` are plain-text copies for readers, search engines and AI tools, generated from the same data on every build.
 
 Only the maintainers change `data/`, by commit. Readings done by AI say so and name the model; many of the first readings were done by Claude (Anthropic) and carry an "Unreviewed by humans" stamp until a person reads the same statement.
 

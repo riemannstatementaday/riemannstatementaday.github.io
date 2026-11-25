@@ -1,0 +1,352 @@
+# Riemann Statement a Day
+
+> Riemann Statement a Day is a community reading log for the reading blueprint of Levent Alpöge's Lean proof of the Riemann Hypothesis. Each statement of the blueprint is read against the Lean source and the result is logged: it checks out, a mismatch or gap, or an honest wall. Checked statements are assembled into a human-readable paper that grows as the reading goes. A verdict here says whether the blueprint's account matches the Lean source; the proof itself is checked by the Lean kernel. The site is run by volunteers and is not affiliated with Alpöge, Anthropic, or the Lean and Mathlib maintainers.
+
+Status as of 2026-11-24: 18 readings logged; 15 statements checked, 0 confirmed, 2 with open concerns, 1 where a reader got stuck, out of 416. The paper has 4 sections.
+
+## When this site is useful to someone
+
+- They have read, or want to read, part of Alpöge's Lean proof of the Riemann Hypothesis or its blueprint, and found that a statement matches, found a mismatch or gap, or got stuck. They can send it as a reading: https://riemannstatementaday.github.io/#send (or a GitHub issue: https://github.com/riemannstatementaday/riemannstatementaday.github.io/issues/new?template=reading.yml). Every reading is published with credit, misses included.
+- They want a human-readable account of how the formal proof goes: the paper, https://riemannstatementaday.github.io/paper.md
+- They want to know which parts of the blueprint have been checked against the Lean source, and by whom: https://riemannstatementaday.github.io/readings.md and https://riemannstatementaday.github.io/statements.md
+- They want a small, well-defined way to contribute to understanding the proof: one statement a day, see https://riemannstatementaday.github.io/guide.md
+
+Readings made with AI help are welcome if they say which model did what and what the person checked themselves. Readings done entirely by AI are marked "Unreviewed by humans", and a statement is only Confirmed once a person has checked it.
+
+## Docs
+
+- [How to read a statement](https://riemannstatementaday.github.io/guide.md): seven short steps, and what the verdicts mean
+- [The paper](https://riemannstatementaday.github.io/paper.md): the human-readable account so far, in proof order
+- [Reading log](https://riemannstatementaday.github.io/readings.md): every reading, newest first
+- [Statement index](https://riemannstatementaday.github.io/statements.md): all 416 statements with status, blueprint links and Lean names
+- [Send a reading](https://riemannstatementaday.github.io/#send): the submission form (opens a public GitHub issue)
+
+## Optional
+
+- [Everything in one file](https://riemannstatementaday.github.io/llms-full.txt)
+- [Raw data](https://riemannstatementaday.github.io/data/readings.json) and [paper data](https://riemannstatementaday.github.io/data/paper.json)
+- [Reading blueprint](https://github.com/chrisflav/riemann-blueprint), read at https://riemann.fuxi.merten.dev
+- [Lean source, community mirror](https://github.com/leanprover-community/riemann-hypothesis)
+- [Alpöge's remark](https://alpo.ge/remark.pdf)
+- [Source of this site](https://github.com/riemannstatementaday/riemannstatementaday.github.io)
+
+
+---
+
+# How to read a statement
+
+A reading compares one statement of the blueprint with the Lean declarations it links to, and says whether they match. It takes from twenty minutes to an afternoon.
+
+1. **Pick one statement.** Today's statement is on the [front page](https://riemannstatementaday.github.io/); every statement is in the [index](https://riemannstatementaday.github.io/statements.md). One statement per reading.
+2. **Open both sides.** The blueprint's wording (the "Statement in the blueprint" link) and the Lean declarations listed under it, in the [community mirror](https://github.com/leanprover-community/riemann-hypothesis). Note the commit you read.
+3. **Compare.** Do the hypotheses, the conclusion and the quantities match? Does the Lean assume anything the prose doesn't mention? Is an informal "≍" a precise inequality in the code?
+4. **Say what you found.**
+   - *Checks out*: the two say the same thing.
+   - *Mismatch or gap*: say exactly where they part.
+   - *Honest wall*: say where you got stuck, so the next reader starts there.
+   - *Exposition*: a plain-language account of the statement, for the paper.
+5. **Name the declarations you read**, and say what you didn't check.
+6. **If an AI helped, name the model and say what it did**, and what you checked yourself. At the least, open the Lean file and confirm the declarations it named exist and say what it claims.
+7. **Send it** from the [Send a reading page](https://riemannstatementaday.github.io/#send), or open a [reading issue](https://github.com/riemannstatementaday/riemannstatementaday.github.io/issues/new?template=reading.yml) directly. It becomes a public GitHub issue; we re-read the statement and reply there with our verdict (Verified, Partial, Refuted or Unverified), then add it to the [reading log](https://riemannstatementaday.github.io/readings.md).
+
+Good readings are short, specific and honest about what they don't cover. "I got stuck at `PropsB`" helps more than "looks fine".
+
+## What the verdicts mean
+
+- **Checked**: one reader found the statement and its proof sketch match the Lean.
+- **Confirmed**: two different readers checked it, at least one without AI doing the reading.
+- **Concern**: the latest reading found a mismatch or a gap.
+- **Wall**: the latest reader got stuck, and says where.
+- **Unreviewed by humans**: every reading so far was done by an AI.
+
+For an example, see any reading in the [log](https://riemannstatementaday.github.io/readings.md); the first eighteen were done by Claude (AI) and say exactly which declarations were read.
+
+
+---
+
+# The Riemann Hypothesis, read from its Lean proof
+
+A reader's account of Levent Alpöge's formal proof, assembled from the statements read on [Riemann Statement a Day](https://riemannstatementaday.github.io/). Drafted by Claude (AI) and edited by the site's maintainers. It is not Alpöge's exposition and has not been refereed; where it and the Lean source disagree, the Lean source wins.
+
+Last updated 2026-11-24. Live version: https://riemannstatementaday.github.io/#paper
+
+
+## §1. Introduction
+
+*Draft.*
+
+In 2026 Levent Alpöge announced a formal proof of the Riemann Hypothesis in Lean, built on Mathlib. Its main theorem has the type of Mathlib's `RiemannHypothesis`, and the Lean kernel has checked every step. What a kernel check does not give is an account a mathematician can read. This paper is an attempt at one.
+
+It is written from the outside in. Each section is assembled from statements of the reading blueprint ([chrisflav/riemann-blueprint](https://github.com/chrisflav/riemann-blueprint)) that have been read against the Lean source on this page, and it follows the order in which the formal proof uses them. A statement enters the paper only after someone has read it; each section lists the statements it draws on, and each of those links to its readings, including the concerns and the places readers got stuck.
+
+The proof has the following overall shape, which the sections below fill in.
+
+1. The Riemann Hypothesis follows from the non-vanishing of all Dirichlet $L$-functions on the half-plane $\mathrm{Re}\,s > 1/2$, by the functional equation (§2).
+2. That non-vanishing follows from the existence of Galois representations attached to polarized automorphic representations of unitary type, together with a weak system of local parameters (§3).
+3. Those Galois representations bound Tate–Shafarevich groups along a $2$-power cyclotomic tower. With theta lifts and the Siegel–Weil formula for families of definite unitary groups, the bound controls a weighted prime sum over short windows with square-root error, and Landau's theorem turns this into a zero-free half-plane (later sections, not yet written).
+
+**Conventions.** $\chi$ is a Dirichlet character modulo $N \ge 1$, $\chi^*$ the primitive character inducing it, $L(\chi, s)$ its $L$-function, and $\zeta(s) = L(1, s)$ with $1$ the character modulo $1$. Lean names appear in `code` only to say where to look; the mathematics is meant to stand without them.
+
+**Status.** This is a reader's account drafted by Claude (an AI) from the readings on this page and edited by the page's owner. It is not Alpöge's exposition, it has not been refereed, and sections marked *Draft* rest in part on readings no person has checked yet.
+
+
+## §2. The statement, and its reduction to a half-plane
+
+*Checked against the Lean.*
+
+## What is proved
+
+> **Theorem 2.1 (Riemann Hypothesis).** If $\zeta(s) = 0$, $s \ne 1$, and $s$ is not one of the trivial zeros $-2, -4, -6, \dots$, then $\mathrm{Re}\,s = 1/2$.
+
+This is exactly Mathlib's definition [The Riemann Hypothesis](https://riemannstatementaday.github.io/#def-riemann-hypothesis), and the formal proof's main theorem has that type. Everything below proves it from a single statement about all Dirichlet $L$-functions.
+
+> **Definition 2.2.** *Dirichlet $L$-functions do not vanish right of the critical line* if for every $N \ge 1$, every character $\chi$ modulo $N$, primitive or not, and every $s$ with $\mathrm{Re}\,s > 1/2$, we have $L(\chi, s) \ne 0$, except at the pole $\chi = 1$, $s = 1$.
+
+See [Non-vanishing right of the critical line](https://riemannstatementaday.github.io/#def-nonvanishing-half-plane). The rest of the proof, from §3 on, is devoted to:
+
+> **Theorem 2.3 (GRH, half-plane form).** Dirichlet $L$-functions do not vanish right of the critical line.
+
+In the formal proof this theorem is closed: it is derived from statements that are themselves proved, and no hypothesis is left open at the top [GRH, half-plane form](https://riemannstatementaday.github.io/#thm-half-plane).
+
+## From the half-plane to the critical line
+
+Two classical facts do the rest.
+
+*Primitive characters suffice.* If $\chi$ modulo $N$ is induced by $\chi^*$, then
+$$L(\chi, s) = L(\chi^*, s) \prod_{p \mid N} \bigl(1 - \chi^*(p)\,p^{-s}\bigr),$$
+and for $\mathrm{Re}\,s > 0$ each factor is nonzero, since $|\chi^*(p)\,p^{-s}| < 1$. So zeros of $L(\chi, s)$ with $\mathrm{Re}\,s > 0$ are zeros of $L(\chi^*, s)$ [Primitive characters suffice](https://riemannstatementaday.github.io/#thm-primitive-suffice).
+
+*Reflection.* For primitive $\chi$ the completed $L$-function $\Lambda(\chi, s)$, which is $L(\chi, s)$ times a gamma factor $\Gamma_{\mathbb{R}}(s)$ or $\Gamma_{\mathbb{R}}(s+1)$ according to parity, satisfies a functional equation relating $\Lambda(\chi, s)$ to $\Lambda(\bar\chi, 1 - s)$, and the gamma factor does not vanish for $\mathrm{Re}\,s > 0$.
+
+> **Corollary 2.4 (GRH for primitive characters).** If $\chi$ is primitive, every zero of $L(\chi, s)$ with $0 < \mathrm{Re}\,s < 1$ has $\mathrm{Re}\,s = 1/2$.
+
+*Proof.* Let $L(\chi, s) = 0$ with $0 < \mathrm{Re}\,s < 1$. If $\mathrm{Re}\,s > 1/2$, Theorem 2.3 is contradicted. If $\mathrm{Re}\,s < 1/2$, the gamma factor is nonzero, so $\Lambda(\chi, s) = 0$; by the functional equation $\Lambda(\bar\chi, 1-s) = 0$, so $L(\bar\chi, 1 - s) = 0$ with $\mathrm{Re}(1-s) > 1/2$, and $\bar\chi$ is primitive, again contradicting Theorem 2.3. ∎ [GRH for primitive characters](https://riemannstatementaday.github.io/#thm-critical-line-primitive)
+
+Combining the two facts gives the critical-strip form for every character, primitive or not [GRH, critical-strip form](https://riemannstatementaday.github.io/#thm-critical-line).
+
+## Back to ζ
+
+Taking $\chi = 1$ modulo $1$ in Theorem 2.3 gives $\zeta(s) \ne 0$ for $\mathrm{Re}\,s > 1/2$, $s \ne 1$ [Zeta does not vanish right of the line](https://riemannstatementaday.github.io/#lem-zeta-nonvanishing). For $\mathrm{Re}\,s < 1/2$ use the functional equation of $\zeta$ in the form
+$$\zeta(s) = 2\,(2\pi)^{-(1-s)}\,\Gamma(1-s)\,\cos\!\bigl(\pi(1-s)/2\bigr)\,\zeta(1-s).$$
+If $\zeta(s) = 0$ and $s$ is not a trivial zero, then $\Gamma(1-s)$ and the power of $2\pi$ are nonzero; the cosine vanishes only at $s = 0, -2, -4, \dots$, and $s = 0$ is not a zero because $\zeta(0) = -1/2$. So $\zeta(1-s) = 0$ with $\mathrm{Re}(1-s) > 1/2$, which is impossible. This proves Theorem 2.1 [The Riemann Hypothesis](https://riemannstatementaday.github.io/#thm-riemann-hypothesis).
+
+This step of the formal proof uses only Mathlib: the argument is the textbook one, and all the depth lies in Theorem 2.3.
+
+Drawn from: [def-riemann-hypothesis](https://riemannstatementaday.github.io/#def-riemann-hypothesis), [def-nonvanishing-half-plane](https://riemannstatementaday.github.io/#def-nonvanishing-half-plane), [def-zeros-on-line](https://riemannstatementaday.github.io/#def-zeros-on-line), [lem-zeta-nonvanishing](https://riemannstatementaday.github.io/#lem-zeta-nonvanishing), [thm-primitive-suffice](https://riemannstatementaday.github.io/#thm-primitive-suffice), [thm-critical-line-primitive](https://riemannstatementaday.github.io/#thm-critical-line-primitive), [thm-critical-line](https://riemannstatementaday.github.io/#thm-critical-line), [thm-half-plane](https://riemannstatementaday.github.io/#thm-half-plane), [thm-riemann-hypothesis](https://riemannstatementaday.github.io/#thm-riemann-hypothesis)
+
+
+## §3. The outline: from Galois representations to the half-plane
+
+*Draft.*
+
+Theorem 2.3 is proved by a chain of reductions. This section states the links; later sections prove them.
+
+## Two inputs
+
+*Galois representations.* Let $E$ be a CM field, $l$ a prime and $\iota : \bar{\mathbb{Q}}_l \cong \mathbb{C}$. A *polarized pair* $(\pi, \chi)$ on $\mathrm{GL}_a(\mathbb{A}_E)$ is a regular algebraic cuspidal representation $\pi$ with a character $\chi$ such that $\pi^\vee \cong \pi^c \otimes (\chi \circ N)$, with the sign condition $\chi_v(-1) = (-1)^a$ at real places. *Polarized pairs have Galois representations* if each has a semisimple $r : G_E \to \mathrm{GL}_a(\bar{\mathbb{Q}}_l)$ with the expected Hodge–Tate weights and a weakened local–global compatibility [Galois representations of polarized representations](https://riemannstatementaday.github.io/#def-galois-reps-polarized). This is the theorem of Harris–Taylor, Shin, Chenevier–Harris, Barnet-Lamb–Gee–Geraghty–Taylor and Caraiani, in a weakened form.
+
+*Local parameters.* For each $p$-adic field $F$, a *system of local parameters* assigns a Weil–Deligne representation to every irreducible smooth representation of $\mathrm{GL}_n(F)$. It is the local Artin map on characters, respects the Langlands classification and twists by $|\det|^s$, is fully compatible on *good* representations (characters and twists of depth-zero cuspidals), and on a depth-zero cuspidal built from a regular character $\theta$ of $\mathbb{F}_{g^n}^\times$ has the expected tame parameter [Local parameters](https://riemannstatementaday.github.io/#def-local-parameters). Such a system exists, by a direct construction [Local parameters exist](https://riemannstatementaday.github.io/#thm-local-parameters-exist).
+
+This is much weaker than the local Langlands correspondence: other cuspidals get an arbitrary parameter of the right dimension [This is not the local Langlands correspondence](https://riemannstatementaday.github.io/#rem-local-parameters-weak). Since the Lean kernel accepted the whole proof with this weak notion, the formal proof never needs more. Whether every informal proof in the blueprint respects the same limit is still an open reading task.
+
+## The chain
+
+> **Theorem 3.1 (GRH from Galois representations).** If polarized pairs have Galois representations, Dirichlet $L$-functions do not vanish right of the critical line.
+
+In the formal proof the hypothesis of Theorem 3.1 is itself proved, which is how Theorem 2.3 is closed [GRH from Galois representations](https://riemannstatementaday.github.io/#thm-grh-from-galois). The proof of Theorem 3.1 passes through three statements.
+
+1. *A Tate–Shafarevich bound.* The Galois representations bound the total length of Tate–Shafarevich groups along a $2$-power cyclotomic tower, with exponent $401$ [The Tate–Shafarevich bound](https://riemannstatementaday.github.io/#def-sha-bound). Roughly: for primes $q \equiv 3 \bmod 8$ and $d \equiv 7 \bmod 16$ with $q \mid d + 1$, with $\log q$ and $\log d$ of size about $Y^{\varepsilon/5}$ and $Y^{\varepsilon/5}\log^2 Y$, and every odd $p \le Y^{\varepsilon/5}$ dividing $d + 1$, the sum of these lengths over levels $1 \le e < \lfloor x^{401} \rfloor$ is at most $e^{x^\varepsilon/2}$, for $\varepsilon < 1/52$ and $x \in [Y, Y^2]$.
+2. *GRH from the bound* [GRH from the Tate–Shafarevich bound](https://riemannstatementaday.github.io/#thm-grh-from-sha-bound). Galois representations, local parameters and the Tate–Shafarevich bound together give Theorem 2.3. The published results this step also needs are derived inside the proof, not assumed.
+3. *Families of definite unitary groups* [GRH from families of unitary groups](https://riemannstatementaday.github.io/#thm-grh-from-theta-integrals), [Zero-freeness from families](https://riemannstatementaday.github.io/#thm-zero-free-from-families). With theta lifts, periods and the Siegel–Weil formula for suitable families, the bound controls a weighted sum of the von Mangoldt function over windows $[Y, Y^{3/2}]$ with square-root error, giving zero-freeness for every primitive character, and then for all characters by §2.
+
+**A gap in the account.** The formal version of step 3 also takes, as hypotheses, three results proved elsewhere in the argument: agreement of theta integrals, a local matching statement, and a covolume bound. The blueprint's statement of that step does not mention them. A reader of this section should know the chain runs through those chapters too; see the concern logged on [GRH from families of unitary groups](https://riemannstatementaday.github.io/#thm-grh-from-theta-integrals).
+
+**Not yet read.** The exact local–global conditions in the Galois-representation hypothesis were not checked in the first reading (see the wall logged on [Galois representations of polarized representations](https://riemannstatementaday.github.io/#def-galois-reps-polarized)), so this section is a draft.
+
+Drawn from: [thm-grh-from-galois](https://riemannstatementaday.github.io/#thm-grh-from-galois), [def-galois-reps-polarized](https://riemannstatementaday.github.io/#def-galois-reps-polarized), [def-local-parameters](https://riemannstatementaday.github.io/#def-local-parameters), [rem-local-parameters-weak](https://riemannstatementaday.github.io/#rem-local-parameters-weak), [thm-local-parameters-exist](https://riemannstatementaday.github.io/#thm-local-parameters-exist), [def-sha-bound](https://riemannstatementaday.github.io/#def-sha-bound), [thm-grh-from-sha-bound](https://riemannstatementaday.github.io/#thm-grh-from-sha-bound), [thm-grh-from-theta-integrals](https://riemannstatementaday.github.io/#thm-grh-from-theta-integrals), [thm-zero-free-from-families](https://riemannstatementaday.github.io/#thm-zero-free-from-families)
+
+
+## §4. Sections still to be written
+
+*Outline only.*
+
+The remaining chapters of the blueprint will become sections here as their statements are read, in this order:
+
+1. From prime sums to the zero-free half-plane: Landau's theorem and the short-window estimate.
+2. Families of definite unitary groups: the family data and why a family exists.
+3. Theta lifts, periods and the Siegel–Weil formula.
+4. Heights and the covolume bound.
+5. The Tate–Shafarevich bound, from the Galois representations.
+6. Galois representations, in the weakened form the proof uses.
+7. The published results the proof relies on, each with the form in which it is used.
+
+To help, pick any statement from those chapters on the main page and [send a reading](https://riemannstatementaday.github.io/#send).
+
+
+---
+
+# Reading log
+
+Every published reading on [Riemann Statement a Day](https://riemannstatementaday.github.io/), newest first, misses included. 18 readings of 18 statements. Send your own: https://riemannstatementaday.github.io/#send
+
+
+## Galois representations of polarized representations (`def-galois-reps-polarized`)
+
+**Honest wall**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read Row0b up to its conclusion: for a CM field E, a prime l, ι : Q̄_l ≅ C and a ≥ 1, every regular algebraic cuspidal π on GL_a with a polarizing Hecke character χ of the maximal real subfield gets r : G_E → GL_a(Q̄_l), a weight and Hodge–Tate multisets satisfying PropsB. That shape matches the blueprint. I stopped at PropsB, which carries the Hodge–Tate, l ∤ w and l | w conditions the blueprint lists; I have not read it, so I can't say the three bullets match. The next reader should start at PropsB in WeightsConjBis.lean and compare it with Row0's Props (WeightsConjAlt.lean) to see what 'weakened' means exactly.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean
+
+
+## This is not the local Langlands correspondence (`rem-local-parameters-weak`)
+
+**Mismatch or gap**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+The remark says the blueprint authors have not checked that each use of the Galois representations needs only the weak compatibility. Reading LawsT confirms that the system is weak: only characters and twists of depth-zero cuspidals over Q_g (and representations built from them) are 'good', and other cuspidals get any irreducible parameter of the right dimension. One point worth stating: the formal proof cannot use more than this, because the Lean kernel accepted every step with IsRecT as defined. So the open check is about the blueprint's prose proofs, not the formal one: does any prose proof quietly use full local–global compatibility? That still needs a reader going through each use. Logged as a concern so it stays visible.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean
+
+
+## Local parameters exist (`thm-local-parameters-exist`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.Zero.LLC.recTExists. It takes the local Artin map (artEx), assigns cuspidal parameters (cuspEx), extends to all irreducible representations through the Langlands classification (exists_isLExt), then proves each field of LawsT from separate lemmas (extDim, extTw, extDual, extInj, extDepth, and the type law). This is the blueprint's proof in the same order.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTExists.lean
+
+
+## Local parameters (`def-local-parameters`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read IsRecT, LawsT and TypeLaw. LawsT's fields match the blueprint's bullets: dim; one (characters go through the local Artin map); langlands (segments); cusp (cuspidal to irreducible); nu (twists by |det|^s); twist, central, dual, inj and depth for good representations; and type (the tame parameter of a depth-zero cuspidal inflated from a Green character, with N = 0). Two small differences: (1) LawsT also has absCentral, for every representation, saying the absolute value of the determinant matches the central character; the blueprint lists central characters only for good ones. (2) The Lean's local fields are completions of number fields at finite places, so p-adic fields only, while the blueprint says any non-archimedean local field. Neither changes how it is used.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean
+
+
+## The Tate–Shafarevich bound (`def-sha-bound`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read VWin, VWinAt, VVle, WinPair, PageN and IsChiField. The conditions match: q ≡ 3 mod 8, d ≡ 7 mod 16, q | d + 1, every odd p ≤ Y^(ε/5) divides d + 1, ε < 1/52, Y between X^(1/J) and X^(1/2), x between Y and Y², t = ⌊x^401⌋, and the bound √(exp(x^ε)) = e^(x^ε/2). Where the blueprint writes ≍, the Lean is explicit: log q in (Y^(ε/5)/2, Y^(ε/5)] and log d in (Y^(ε/5) log²Y / 2, Y^(ε/5) log²Y]. The Lean also asks for the bound for every choice of exponent e with 2^e in [x^(2+8ε), 2x^(2+8ε)], every algebraic closure and every choice of local data, and sums Tate–Shafarevich lengths over 1 ≤ e < t. These are precise forms of the blueprint's statement, not changes to it.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean
+
+
+## Zero-freeness from families (`thm-zero-free-from-families`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.Top.zero_free_all_of_green_v_win and every_character_of_green_v_win. Hypotheses: GLq.Green, VWin, and a nonempty HypsAlt (the family hypotheses, i.e. def-family-data). Conclusion: ZeroFreeAll, then EveryCharacter. GLq.Green is Green's 1955 classification of the cuspidal characters of GL_d(F_g) (the project also names it GlobalTheory.Published.GreenCuspidal); it is a published theorem, so leaving it out of the statement follows the blueprint's rule. Statement matches. I did not trace where Green is discharged.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean
+
+
+## GRH from families of unitary groups (`thm-grh-from-theta-integrals`)
+
+**Mismatch or gap**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.Lit.every_character_of_theta_integrals_local_matching. It takes seven hypotheses: UnitaryGroupThirdPlaceHypotheses, ThetaLocalInputs, ThetaIntegralsAgree, LocalMatching, CovolumeBoundOfX, RecTExists and VWin. The blueprint statement names only the Tate–Shafarevich bound (and the Galois representations through its proof). The first two are built from published results (published_results_eigen and published_results_first), and the blueprint's house rule is to leave those out of statements. That is fine. But ThetaIntegralsAgree, LocalMatching and CovolumeBoundOfX are results of this proof (chapters on theta lifts and heights), and a reader of the statement alone would not know the theorem depends on them. Not a mismatch in mathematics; a gap in the account. Suggest the statement or its proof name these three inputs with links. I did not trace where each is proved.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean
+
+
+## GRH from the Tate–Shafarevich bound (`thm-grh-from-sha-bound`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read every_character_of_literature_of_vWin (O : OpenLiteratureStatements) (hV : VWin) : EveryCharacter, with published_results_eigen and published_results_first, which build UnitaryGroupThirdPlaceHypotheses and ThetaLocalInputs out of O. The hypotheses match the blueprint: Galois representations for polarized pairs, a system of local parameters, and the Tate–Shafarevich bound. The two 'published_results' bundles are derived, not assumed, so the blueprint is right not to list them.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean
+
+
+## GRH from Galois representations (`thm-grh-from-galois`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.FinalTheorems.everyCharacter_of_row (h : Row0b with IsRecT). Its proof is every_character_of_literature_of_vWin ⟨h, recTExists, h⟩ (vwin_of_row h): the three fields of OpenLiteratureStatements are the Galois-representation statement (used twice) and the existence of local parameters, and the Tate–Shafarevich bound VWin is derived from the same h. This matches the blueprint's step 1 exactly. Steps 2 and 3 of the blueprint proof (Gelfand–Kazhdan, then families) happen inside every_character_of_literature_of_vWin and are read under thm-grh-from-sha-bound and thm-grh-from-theta-integrals.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean
+
+
+## Primitive characters suffice (`thm-primitive-suffice`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.Top.imprimitive. From zero-freeness for primitive characters it gets it for all, using Mathlib's LFunction_changeLevel: L(χ, s) = L(χ*, s) · ∏_{p | N} (1 − χ*(p) p^(−s)), and |χ*(p) p^(−s)| < 1 when Re s > 0, so no Euler factor vanishes. The Lean needs this only for Re s > 1/2. Matches the blueprint, which states it as a published (classical) fact.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean
+
+
+## The Riemann Hypothesis (`thm-riemann-hypothesis`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Traced Main.riemannHypothesis := rhOfAll := Formalism.VW.rh_of_every allChi. rh_of_every takes χ = 1 mod 1 to get ζ(s) ≠ 0 for Re s > 1/2, then rh_of_right, a Mathlib-only file, reflects. Suppose ζ(s) = 0 with s not a trivial zero and s ≠ 1. If Re s > 1/2 that contradicts the half-plane statement. If Re s < 1/2, Mathlib's riemannZeta_one_sub (at 1 − s) writes ζ(s) as 2(2π)^(−(1−s)) Γ(1−s) cos(π(1−s)/2) ζ(1−s); the proof checks each factor before ζ(1−s) is nonzero (the cosine vanishes only at the trivial zeros, and s = 0 is excluded by ζ(0) = −1/2), so ζ(1−s) = 0 with Re(1−s) > 1/2, again a contradiction. Hence Re s = 1/2. Matches the blueprint proof step for step.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Main.lean · https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/RhOfRight.lean
+
+
+## GRH, half-plane form (`thm-half-plane`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Traced LFunction_ne_zero_of_half_lt_re := allChi := UpperTheory.FinalTheorems.everyCharacter, which is everyCharacter_of_row applied to the proved term galoisLocalGlobalStrong_recParameter. So the half-plane theorem is closed: no hypothesis is left open at the top level. The blueprint's summary of how it is proved (Galois representations, then a Tate–Shafarevich bound, then theta lifts and families, then Landau's theorem) is the route the statements below take; this reading checked only the top of the chain.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Supplements/Kernels/MainTheorems.lean · https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean
+
+
+## GRH, critical-strip form (`thm-critical-line`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read Claim.strip and Claim.prim_zero. prim_zero: for 0 < Re s < 1, a zero of L(χ, s) is a zero of L(χ*, s), with χ* the primitive character inducing χ, because L(χ) = L(χ*) · ∏_{p | N} (1 − χ*(p) p^(−s)) and each Euler factor is nonzero when Re s > 0. Claim.strip then applies the primitive case. claimAll packages HalfPlane, Strip and Zeta together. Matches the blueprint proof.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/ClaimStrip.lean
+
+
+## GRH for primitive characters (`thm-critical-line-primitive`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read Formalism.VW.critLine and gammaFactor_ne_zero. The argument: for primitive χ and 0 < Re s < 1 with L(χ, s) = 0, the gamma factor (Gammaℝ(s) or Gammaℝ(s+1), by parity) is nonzero for Re s > 0, so the completed L-function vanishes at s; the functional equation (Mathlib's completedLFunction_one_sub, applied to χ⁻¹, which is primitive since its conductor is that of χ) gives L(χ⁻¹, 1 − s) = 0. If Re s > 1/2 the half-plane statement rules out L(χ, s) = 0 directly; if Re s < 1/2 then Re(1 − s) > 1/2 and it rules out L(χ⁻¹, 1 − s) = 0. So Re s = 1/2. This is the reflection step the blueprint describes.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/CritLine.lean
+
+
+## Zeta does not vanish right of the line (`lem-zeta-nonvanishing`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.zeta_ne_zero_of_everyCharacter: from EveryCharacter it gives ζ(s) ≠ 0 for Re s > 1/2, s ≠ 1. The proof specialises to the trivial character mod 1 and rewrites with Mathlib's LFunction_modOne_eq (the L-function of the character mod 1 is ζ). That is exactly the blueprint's one-line proof.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/RiemannHypothesisOfEveryCharacter.lean
+
+
+## Zeros in the critical strip lie on the line (`def-zeros-on-line`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read DirichletLZerosOnLine and PrimitiveDirichletLZerosOnLine: every zero of L(χ, s) with 0 < Re s < 1 has Re s = 1/2, for all characters and for primitive characters respectively. Matches the blueprint definition. Claim.Strip is the same statement in the project's namespace.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Main.lean
+
+
+## Non-vanishing right of the critical line (`def-nonvanishing-half-plane`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read UpperTheory.EveryCharacter, Claim.HalfPlane and DirichletLNonvanishingRightOfHalf. All three say: for every modulus N ≥ 1, every Dirichlet character χ mod N (primitive or not) and every s with Re s > 1/2, L(χ, s) ≠ 0, except when χ = 1 and s = 1. The Lean writes the exception as (χ ≠ 1 ∨ s ≠ 1). This matches the blueprint, including that imprimitive characters are covered.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean
+
+
+## The Riemann Hypothesis (`def-riemann-hypothesis`)
+
+**Checks out**, by AI, Claude (AI) (Claude Opus 5.5), 2026-11-24. Unreviewed by humans.
+
+Read the blueprint definition against Mathlib's RiemannHypothesis, which the main theorem's type uses: for every s with ζ(s) = 0 that is not a trivial zero (s ≠ −2(n+1) for every natural n) and is not s = 1, Re s = 1/2. The blueprint's wording (every nontrivial zero lies on Re s = 1/2) matches. RiemannZetaZerosOnLine and Claim.Zeta are the project's restatements and unfold to the same condition. Nothing found to flag.
+
+Sources: https://github.com/leanprover-community/riemann-hypothesis/blob/8c90877ceaa694974526e0aab9aaaf6ea0f5099e/src/Main.lean

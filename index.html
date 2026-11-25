@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Riemann Statement a Day</title>
 <meta name="description" content="A community reading log for the blueprint of Levent Alpöge's Lean proof of the Riemann Hypothesis, and a human-readable paper that grows as statements are read.">
+<link rel="canonical" href="https://riemannstatementaday.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%233346b8'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='white'%3E%CE%B6%3C/text%3E%3C/svg%3E">
+<link rel="alternate" type="application/atom+xml" title="Readings" href="https://riemannstatementaday.github.io/feed.xml">
+<link rel="alternate" type="text/plain" title="llms.txt" href="https://riemannstatementaday.github.io/llms.txt">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Riemann Statement a Day">
+<meta property="og:title" content="Riemann Statement a Day">
+<meta property="og:description" content="A community reading log for the blueprint of Levent Alpöge&#x27;s Lean proof of the Riemann Hypothesis, and a human-readable paper that grows as statements are read.">
+<meta property="og:url" content="https://riemannstatementaday.github.io/">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Riemann Statement a Day", "url": "https://riemannstatementaday.github.io/", "description": "A community reading log for the blueprint of Levent Alpöge's Lean proof of the Riemann Hypothesis, and a human-readable paper that grows as statements are read.", "inLanguage": "en", "about": {"@type": "CreativeWork", "name": "Lean proof of the Riemann Hypothesis", "author": {"@type": "Person", "name": "Levent Alpöge"}}, "potentialAction": {"@type": "CreateAction", "name": "Send a reading", "target": "https://riemannstatementaday.github.io/#send"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -161,6 +172,7 @@ nav.views a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accen
 .toc .n{font-family:var(--mono);font-size:12px;min-width:2.2em}
 .ptitle{display:flex;flex-direction:column;gap:10px;max-width:68ch}
 .ptitle h2{font-size:clamp(28px,4.4vw,40px)}
+.howto{margin-top:14px;border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:var(--surface)}.howto summary{cursor:pointer;font-weight:600}.howto ol{margin:10px 0 4px;padding-left:22px}.howto li{margin:4px 0}.hnote{font-size:14px;color:var(--muted);margin:6px 0 0}
 .pnote{font-size:14px;color:var(--muted);border-left:2px solid var(--st-concern);padding-left:10px}
 .prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden;max-width:420px}
 .prog span{display:block;height:100%;background:var(--st-checked)}
@@ -189,6 +201,7 @@ footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);paddin
 
 </head>
 <body>
+<noscript><div class="wrap" style="padding-bottom:0"><p class="banner">This page builds itself with JavaScript. Without it, read the same content as plain text: <a href="guide.md">how to read</a> · <a href="paper.md">the paper</a> · <a href="readings.md">reading log</a> · <a href="statements.md">statement index</a> · <a href="llms.txt">llms.txt</a>.</p></div></noscript>
 <div class="wrap">
   <header>
     <span class="eyebrow">A community reading log · Lean proof of RH</span>
@@ -298,6 +311,15 @@ footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);paddin
       <h2 id="send-h">Send us what you read.</h2>
       <p>Pick one statement of the blueprint, read it against the Lean source, and tell us what you found: it checks out, a mismatch or a gap, the place you got stuck, or a plain-language account of it for the paper.</p>
       <p>We, the page owner with Claude, re-read the statement against the same Lean declarations and reply on your GitHub issue with our own verdict: <span class="vlist"><span class="stamp s-verified">Verified</span>, <span class="stamp s-partial">Partial</span>, <span class="stamp s-refuted">Refuted</span> or <span class="stamp s-unverified">Unverified</span></span>. Then the reading goes into the log under that verdict, misses included.</p>
+      <details class="howto"><summary>How to read, in seven steps</summary><ol>
+        <li><b>Pick one statement.</b> Today's, or any from the index. One per reading.</li>
+        <li><b>Open both sides</b>: the blueprint's wording and the Lean declarations listed under it. Note the commit.</li>
+        <li><b>Compare</b> hypotheses, conclusion and quantities. Does the Lean assume anything the prose doesn't say?</li>
+        <li><b>Say what you found</b>: checks out, mismatch or gap (say where), honest wall (say where you got stuck), or exposition.</li>
+        <li><b>Name the declarations you read</b>, and what you didn't check.</li>
+        <li><b>If an AI helped</b>, name the model and what it did, and confirm yourself that the declarations it names exist.</li>
+        <li><b>Send it</b> below. Short, specific and honest beats long.</li>
+      </ol><p class="hnote">Also as plain text: <a href="guide.md">guide.md</a>.</p></details>
     </div>
     <div class="ok" id="sDone" hidden></div>
     <form class="fform" id="frm" novalidate>
